@@ -1,26 +1,28 @@
 "use strict";
-// Les accolades permettent de réutiliser les noms du chapitre précédent.
+// Les accolades limitent les noms Animal et Dog à cet exemple.
 {
     class Animal {
-        // public : accessible partout. protected : dans la classe et ses sous-classes.
+        // private réserve l'accès à Animal. protected l'autoriserait aussi dans Dog.
+        // readonly permet de donner une valeur dans le constructeur. TypeScript interdit ensuite de la changer.
         name;
-        age;
+        age; // Sans mot-clé, age est public et accessible depuis l'extérieur.
         constructor(name, age) {
-            this.name = name;
+            this.name = name; // Cette première affectation est autorisée dans le constructeur.
             this.age = age;
         }
+        // move est écrite dans Animal, donc elle peut lire la propriété privée name.
         move() {
             alert(this.name + " se déplace");
         }
     }
     class Dog extends Animal {
         makeSound() {
-            // alert(this.name + " aboie !"); // Erreur : name est privé dans Animal.
+            // alert(this.name + " aboie !"); // Erreur : Dog ne peut pas lire le name privé d'Animal.
             alert("Le chien aboie !");
         }
     }
     let pet = new Dog("Simba", 12);
-    // pet.name = "Meddor"; // Erreur : name est privé et en lecture seule.
-    pet.move();
-    pet.makeSound();
+    // pet.name = "Meddor"; // Erreur : name est inaccessible ici et en lecture seule.
+    pet.move(); // Affiche « Simba se déplace » en passant par la méthode publique d'Animal.
+    pet.makeSound(); // Affiche « Le chien aboie ! ».
 }
