@@ -1,0 +1,11 @@
+{
+    "include": ["src"],
+    "compilerOptions": {
+        "outDir": "dist",
+        "rootDir": "src",
+        "target": "esnext",
+        "noEmitHelpers": true,
+        "noEmit": false,
+    }
+
+}
